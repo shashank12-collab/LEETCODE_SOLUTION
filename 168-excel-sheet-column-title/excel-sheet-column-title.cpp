@@ -9,7 +9,6 @@ public:
         int rem = columnNumber % 26 ;
         s += (rem + 'A');
         columnNumber = columnNumber / 26;
-
        }
         reverse(s.begin() , s.end());
        return s;
