@@ -29,15 +29,21 @@ public:
             return count;
         }
         int totalWaviness(int num1, int num2) {
-        vector<int> arr;
         int waviness = 0;
+        //REMOVE THE UNNCESSARY PART
+        //vector<int> arr;
+        // for(int i = num1 ; i <= num2 ; i++)
+        // {
+        //     arr.push_back(i);
+        // }
+        // for(int i = 0 ; i < arr.size() ; i++)
+        // {
+        //     waviness += peakAndValleyEleNum(arr[i]);
+        // }
+
         for(int i = num1 ; i <= num2 ; i++)
         {
-            arr.push_back(i);
-        }
-        for(int i = 0 ; i < arr.size() ; i++)
-        {
-            waviness += peakAndValleyEleNum(arr[i]);
+            waviness += peakAndValleyEleNum(i);
         }
         return waviness;
     }
