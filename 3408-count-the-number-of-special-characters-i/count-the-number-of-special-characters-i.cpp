@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int numberOfSpecialChars(string word) {
+        unordered_set<char> st(word.begin() , word.end());
+        int n = word.length();
+        int cnt = 0;
+        for(char ch = 'a' ; ch <= 'z' ; ch++)
+        {
+            if(st.count(ch) &&  st.count(toupper(ch)))
+            {
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+};
