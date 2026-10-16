@@ -25,9 +25,9 @@ public:
         {
             return left;
         }
-        else 
+        else
         {
-            return root ;
+            return root;
         }
     }
 };
