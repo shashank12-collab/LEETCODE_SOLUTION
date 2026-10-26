@@ -2,19 +2,18 @@ class Solution {
 public:
     int largestAltitude(vector<int>& gain) {
         int n = gain.size();
-        vector<int> ansarray;
-        ansarray.push_back(0);
+        int HighestAltitude = INT_MIN;
+        vector<int> ans(n+1 , 0);
+        int prefix = 0;
         for(int i = 0 ; i < n ; i++)
         {
-            int res = ansarray[i] + gain[i];
-           ansarray.push_back(res);
+            prefix += gain[i];
+            ans[i+1] += prefix;
         }
-
-        int maxi = ansarray[0];
-        for(int i = 1 ; i < ansarray.size() ; i++)
+        for(int i = 0 ; i < ans.size() ; i++)
         {
-            maxi = max(maxi , ansarray[i]);
+            HighestAltitude = max(ans[i] , HighestAltitude);
         }
-        return maxi;
+        return HighestAltitude;
     }
 };
