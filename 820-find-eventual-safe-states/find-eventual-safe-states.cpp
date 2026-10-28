@@ -1,38 +1,45 @@
 class Solution {
 public:
+    bool dfs(int node , vector<vector<int>> & graph , vector<int>& state)
+    {
+        if(state[node] == 1)
+        {
+            return false;
+        }
+        if(state[node] == 2)
+        {
+            return true;
+        }
+        if(state[node] == 3)
+        {
+            return false;
+        }
+
+        state[node] = 1;
+
+        for(auto it : graph[node])
+        {
+            if(!dfs(it , graph , state))
+            {
+                state[node] = 3;
+                return false;
+            }
+        }
+        state[node] = 2;
+        return true;
+    }
     vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
         int n = graph.size();
-        vector<vector<int>> adj(n);
-        vector<int> indegree(n, 0);
+       vector<int> state(n , 0);
+       vector<int> ans;
 
-        for (int i = 0; i < n; i++) {
-            for (auto it : graph[i]) {
-                adj[it].push_back(i);
-                indegree[i]++;
-            }
+       for(int i = 0 ; i < n ; i++)
+       {
+        if(dfs(i,graph,state))
+        {
+            ans.push_back(i);
         }
-
-        queue<int> q;
-        vector<int> ans;
-        for (int i = 0; i < n; i++) {
-            if (indegree[i] == 0) {
-                q.push(i);
-            }
-        }
-
-        while (!q.empty()) {
-            int node = q.front();
-            ans.push_back(node);
-            q.pop();
-
-            for (auto it : adj[node]) {
-                indegree[it]--;
-                if (indegree[it] == 0) {
-                    q.push(it);
-                }
-            }
-        }
-        sort(ans.begin(), ans.end());
-        return ans;
+       }
+       return ans;
     }
 };
