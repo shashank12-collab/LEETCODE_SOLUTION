@@ -1,21 +1,39 @@
 class Solution {
 public:
-    bool isPalindrome(int x) {
-        if(x < 0)
-        return false;
-        int num = x;
-        long long rev = 0;
-        while(num>0)
+    vector<int> numToArr(int x) {
+        vector<int> ans;
+
+        if(x == 0) return {0};
+
+        while(x != 0)
         {
-            int last_digit = num%10;
-            num=num/10;
-            rev= (rev * 10)+ last_digit;
+            int last_digit = x % 10;
+            ans.push_back(last_digit);
+            x = x / 10;
         }
-        if(num == rev)
-        {
-            return true;
-        }
-        return x== rev;
+
+        reverse(ans.begin(), ans.end());
+        return ans;
     }
 
+    bool isPalindrome(int x) {
+
+        if(x < 0) return false;
+
+        vector<int> res = numToArr(x);
+
+        int i = 0;
+        int j = res.size() - 1;
+
+        while(i <= j)
+        {
+            if(res[i] != res[j])
+                return false;
+
+            i++;
+            j--;
+        }
+
+        return true;
+    }
 };
