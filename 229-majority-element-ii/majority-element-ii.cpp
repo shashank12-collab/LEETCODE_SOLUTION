@@ -3,16 +3,21 @@ public:
     vector<int> majorityElement(vector<int>& nums) {
         int n = nums.size();
         vector<int> ans;
-        unordered_map<int , int> mpp;
-        for(int i = 0 ; i < n ; i++)
+        sort(nums.begin() , nums.end());
+        int cnt = 1;
+        for(int i = 1 ; i <= n ; i++)
         {
-            mpp[nums[i]]++;
-        }
-        for(auto it : mpp)
-        {
-            if(it.second > n/3)
+            if(i < n && nums[i] == nums[i-1])
             {
-               ans.push_back(it.first); 
+                cnt++;
+            }
+            else
+            {
+                if(cnt > n/3)
+                {
+                    ans.push_back(nums[i-1]);
+                }
+                cnt = 1;
             }
         }
         return ans;
